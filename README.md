@@ -1,4 +1,4 @@
-# bu-projects
+# Trading in Volatile time
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
