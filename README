@@ -1,0 +1,62 @@
+Outline of the project: The following is an outline of what you need to do with your
+teammates for this project. Some of the description is intentionally vogue. You are
+encouraged to go beyond of the following outline. Interesting extensions will be awarded
+with additional marks.
+1. Data preparation and illustration
+Calculate the log return of SP500 index using the “adj close” price. Draw the
+histogram of the log return, fit to a normal distribution, compare the tail of the fitted
+distribution with the empirical distribution.
+2. AR(1) model
+a) Split the data into a portfolio formation period and a portfolio testing period. You
+can download more data during your project.
+b) In the portfolio formation period, fit the SP500 price as a linear function of time,
+call this linear function S"#$(t) and think it as the linear trend of SP500 in the
+portfolio formation period.
+c) In the portfolio formation period, calculate �(�) = �(�) − S"#$(�), where S(t) is
+the SP500 price at time t. You can think Y(t) is the deviation from the SP500
+trend. Fit a AR(1) model on ΔY(t) = Y(t)-Y(t-1) and see if there is a significant
+negative auto-correlation of lag 1.
+d) Extract a continuous time mean reverting model for Y using the AR(1) model for
+ΔY(t). Use the sample volatility of Y(t) in the portfolio formation period as the
+volatility parameter in your model.
+3. Trading strategy using ad-hoc bands
+Design trading strategies by choose several ad-hoc bands using the volatility of Y(t) in
+the portfolio formation period. Call the lower bound Y2 and the upper bound Y3. Test
+these trading strategies using data in the portfolio testing period. In the testing
+period, you can calculate S"#$(t) in a rolling window (for example, average of SP500
+prices in the last three days). When S(t) reaches S"#$(t) + Y2, buy SP500; when
+S"#$(t) + Y3 is reached, sell SP500. 
+The initial capital is assumed to be $1,000. For different choice of ad-hoc bands,
+Calculate the cumulative P&L of your strategy at the end of the portfolio testing
+period. When the end of the portfolio testing period is reached, you are forced to
+close your position. Compare the performance of your strategies and also against
+the buy and hold strategy in the same period of time using mean, variance and
+Sharpe ratio of P&Ls.
+For the best ad-hoc bands that you identify, short $1000 value of SP500 (say X units
+of SP500) at the beginning of the portfolio testing period and use the $1000 to
+construct your strategy, buy back X units of SP500 at the end of the portfolio testing
+period. What is the performance of your long-short strategy?
+4. Trading strategy using optimal bands
+a) In the portfolio formation period, consider S(t) = Y(t) + S"#$(t) as a model
+for the SP500 price. Here S"#$(t) comes from 2 (b) and Y(t) is obtained from 2
+(d). Take the end of the portfolio formation period as the investment horizon.
+Assume the discounting factor is zero. Write down the free boundary equations
+for the exiting and entering problems. Both these free boundary equations for
+functions with respect to t and S(t).
+b) Solve these two free boundary PDEs using finite difference methods (this is
+similar to American option pricing problem on a finite horizon).
+c) Find the optimal entering boundary S2(t) and the optimal exiting boundary S3(t).
+Since we work with a finite horizon problem, both boundaries are time
+dependent. Using these two boundaries, we can calculate boundaries for Y(t) via
+Y2(t) = S2(t) - S"#$(t) and Y3(t) = S3(t) - S"#$(t).
+d) In the portfolio testing period, calculate S"#$(t) in a rolling window as in #3.
+When S(t) reaches Y2(t) + S"#$(t) buy SP500 and when S(t) reaches Y5(t) +
+S"#$(t) sell SP500. Form a long-short strategy like #3, what is the performance
+of this strategy? P&L is calculated by the end of the portfolio testing period.
+5. Delay in execution
+For the strategies constructed in #3 and #4, if execution (buy and sell) is delayed by 1
+day (typical case when trading mutual funds), what is the performance of these longshort strategies?
+Note: In the portfolio formation period, we “look ahead” to calculate S"#$(t). It would be
+better to calculate S"#$(t) in a rolling window. However, this would complicate #4, because
+we need to first find the dynamic of S"#$(t) and write down free boundary equations which
+depend on two states S"#$(t) and Y(t).
